@@ -6,10 +6,6 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use App\Tools;
 
-$app->get('/', function (Request $request, Response $response,array $args) {
-    return $response->getBody()->write('Hola Usuario');
-});
-
 $app->get('/api/v1/albums', function (Request $request, Response $response,array $args) {
     $this->logger->addInfo('Se accedio al modulo /api/v1/albums');
 
