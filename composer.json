@@ -1,0 +1,23 @@
+{   "name": "vendor_name/php-spoty",
+    "description": "Finds all the albums for an Artist",
+    "authors": [
+        {
+            "name": "nicolas",
+            "email": "nstirnemann59@mail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "3.*",
+        "monolog/monolog": "^1.26",
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/classes/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8080 -t public",
+        "test": "phpunit"
+    }
+}
