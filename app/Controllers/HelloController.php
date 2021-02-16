@@ -17,7 +17,8 @@ class HelloController
 
     public function home(Request $request, Response $response, $args = [])
     {
-        $name = $request->getAttribute('name');
+
+        $name = $_ENV['ENV'];
         $response->getBody()->write("Hello, $name");
 
         return $response;

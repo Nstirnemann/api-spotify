@@ -24,9 +24,7 @@ $container['SpotifyController'] = function ($c) {
 
     return new \App\Controllers\SpotifyController(
         $c['client'],
-        $c['logger'],
-        $SpSettings['client_id'],
-        $SpSettings['client_secret']
+        $c['logger']
     );
 };
 

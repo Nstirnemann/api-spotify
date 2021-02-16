@@ -10,11 +10,9 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 class SpotifyController {
 
-    public function __construct(Client $client, Logger $logger, $client_id, $client_secret){
+    public function __construct(Client $client, Logger $logger){
         $this->client = $client;
         $this->logger = $logger;
-        $this->client_id = $client_id;
-        $this->client_secret = $client_secret;
     }
     
     public function get(Request $request, Response $response, $args = []) {
@@ -67,11 +65,11 @@ class SpotifyController {
     }
 
     private function autentificar(){
-        $auth = $this->client->post('https://accounts.spotify.com/api/token', [
+        $auth = $this->client->post($_ENV['URL_AUTH'], [
             'form_params' => [
                 'grant_type' => 'client_credentials',
-                'client_id' => $this->client_id,
-                'client_secret' => $this->client_secret,
+                'client_id' => $_ENV['CLIENT_ID'],
+                'client_secret' => $_ENV['CLIENT_SECRET'],
             ]
         ]);
 
@@ -81,7 +79,7 @@ class SpotifyController {
     }
 
     private function obtenerIdArtista($album, $access_token) {
-        $artist = $this->client->get('https://api.spotify.com/v1/search', [
+        $artist = $this->client->get($_ENV['URL_SEARCH'], [
             'query' => ['q' => $album, 'type' => 'artist', 'limit' => 1, 'offset' => 0],         
             'headers' => ["Content-Type: application/json", 'Authorization' => "Bearer {$access_token}"]
         ])->getBody()->getContents();
@@ -96,7 +94,7 @@ class SpotifyController {
     }
 
     private function findAlbumes($id, $access_token){
-        $album_list = $this->client->get('https://api.spotify.com/v1/artists/'.$id.'/albums', [
+        $album_list = $this->client->get($_ENV['URL_ARTIST'].$id.'/albums', [
             'query' => ['include_groups'=> 'album,single,compilation', 'market' => 'AR','limit' => 50, 'offset' => 0],         
             'headers' => ["Content-Type: application/json", 'Authorization' => "Bearer {$access_token}"]
         ]);

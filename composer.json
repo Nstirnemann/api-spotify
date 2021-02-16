@@ -9,7 +9,8 @@
     "require": {
         "slim/slim": "3.*",
         "monolog/monolog": "^1.26",
-        "guzzlehttp/guzzle": "^6.5"
+        "guzzlehttp/guzzle": "^6.5",
+        "vlucas/phpdotenv": "^5.3"
     },
     "autoload-dev": {
         "psr-4": {
